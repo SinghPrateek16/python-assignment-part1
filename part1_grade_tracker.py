@@ -1,419 +1,326 @@
-{
-  "cells": [
-    {
-      "cell_type": "code",
-      "source": [
-        "# PART 1: Python Basics & Control Flow\n",
-        "\n",
-        "\n",
-        "# Task- 1\n",
-        "\n",
-        "# data provided\n",
-        "\n",
-        "raw_students = [\n",
-        "    {\"name\": \"  ayesha SHARMA  \", \"roll\": \"101\", \"marks_str\": \"88, 72, 95, 60, 78\"},\n",
-        "    {\"name\": \"ROHIT verma\",       \"roll\": \"102\", \"marks_str\": \"55, 68, 49, 72, 61\"},\n",
-        "    {\"name\": \"  Priya Nair  \",    \"roll\": \"103\", \"marks_str\": \"91, 85, 88, 94, 79\"},\n",
-        "    {\"name\": \"karan MEHTA\",       \"roll\": \"104\", \"marks_str\": \"40, 55, 38, 62, 50\"},\n",
-        "    {\"name\": \" Sneha pillai \",    \"roll\": \"105\", \"marks_str\": \"75, 80, 70, 68, 85\"},\n",
-        "]\n",
-        "\n",
-        "# new list to store cleaned data\n",
-        "final_list = []\n",
-        "\n",
-        "# looping through each student\n",
-        "for record in raw_students:\n",
-        "\n",
-        "    # removing spaces and fixing name format\n",
-        "    full_name = record[\"name\"].strip().title()\n",
-        "\n",
-        "    # converting roll number from string to int\n",
-        "    roll_no = int(record[\"roll\"])\n",
-        "\n",
-        "    # converting marks string into list of numbers\n",
-        "    marks_list = []\n",
-        "    for num in record[\"marks_str\"].split(\", \"):\n",
-        "        marks_list.append(int(num))\n",
-        "\n",
-        "    # checking if name is valid\n",
-        "    is_valid = True\n",
-        "    for part in full_name.split():\n",
-        "        if not part.isalpha():\n",
-        "            is_valid = False\n",
-        "\n",
-        "    # printing result\n",
-        "    if is_valid:\n",
-        "        print(\"✓ Valid name\")\n",
-        "    else:\n",
-        "        print(\"✗ Invalid name\")\n",
-        "\n",
-        "    # printing student info\n",
-        "    print(\"=\" * 32)\n",
-        "    print(\"Student :\", full_name)\n",
-        "    print(\"Roll No :\", roll_no)\n",
-        "    print(\"Marks   :\", marks_list)\n",
-        "    print(\"=\" * 32)\n",
-        "\n",
-        "    # storing cleaned data\n",
-        "    final_list.append({\n",
-        "        \"name\": full_name,\n",
-        "        \"roll\": roll_no,\n",
-        "        \"marks\": marks_list\n",
-        "    })\n",
-        "\n",
-        "# finding student with roll 103\n",
-        "for item in final_list:\n",
-        "    if item[\"roll\"] == 103:\n",
-        "        print(item[\"name\"].upper())\n",
-        "        print(item[\"name\"].lower())\n",
-        "\n"
-      ],
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "NH5VQwqYZE7c",
-        "outputId": "6708f052-da49-4b6a-a4ba-a86a8cfcb531"
-      },
-      "execution_count": 1,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "✓ Valid name\n",
-            "================================\n",
-            "Student : Ayesha Sharma\n",
-            "Roll No : 101\n",
-            "Marks   : [88, 72, 95, 60, 78]\n",
-            "================================\n",
-            "✓ Valid name\n",
-            "================================\n",
-            "Student : Rohit Verma\n",
-            "Roll No : 102\n",
-            "Marks   : [55, 68, 49, 72, 61]\n",
-            "================================\n",
-            "✓ Valid name\n",
-            "================================\n",
-            "Student : Priya Nair\n",
-            "Roll No : 103\n",
-            "Marks   : [91, 85, 88, 94, 79]\n",
-            "================================\n",
-            "✓ Valid name\n",
-            "================================\n",
-            "Student : Karan Mehta\n",
-            "Roll No : 104\n",
-            "Marks   : [40, 55, 38, 62, 50]\n",
-            "================================\n",
-            "✓ Valid name\n",
-            "================================\n",
-            "Student : Sneha Pillai\n",
-            "Roll No : 105\n",
-            "Marks   : [75, 80, 70, 68, 85]\n",
-            "================================\n",
-            "PRIYA NAIR\n",
-            "priya nair\n"
-          ]
-        }
-      ]
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Task - 2\n",
-        "\n",
-        "\n",
-        "\n",
-        "student = \"Ayesha Sharma\"\n",
-        "\n",
-        "# list of subjects and marks\n",
-        "subject_list = [\"Math\", \"Physics\", \"CS\", \"English\", \"Chemistry\"]\n",
-        "marks_list = [88, 72, 95, 60, 78]\n",
-        "\n",
-        "# function to calculate grade\n",
-        "def find_grade(score):\n",
-        "    if score >= 90:\n",
-        "        return \"A+\"\n",
-        "    elif score >= 80:\n",
-        "        return \"A\"\n",
-        "    elif score >= 70:\n",
-        "        return \"B\"\n",
-        "    elif score >= 60:\n",
-        "        return \"C\"\n",
-        "    else:\n",
-        "        return \"F\"\n",
-        "\n",
-        "# printing each subject with marks and grade\n",
-        "\n",
-        "print(\"\\nSubject Wise Marks\")\n",
-        "for index in range(len(subject_list)):\n",
-        "    sub_name = subject_list[index]\n",
-        "    score = marks_list[index]\n",
-        "    print(sub_name, \":\", score, \"Grade =\", find_grade(score))\n",
-        "\n",
-        "# calculating total marks\n",
-        "total_marks = sum(marks_list)\n",
-        "\n",
-        "# calculating average\n",
-        "average_marks = round(total_marks / len(marks_list), 2)\n",
-        "\n",
-        "print(\"\\nTotal Marks:\", total_marks)\n",
-        "print(\"Average Marks:\", average_marks)\n",
-        "\n",
-        "# finding highest and lowest\n",
-        "highest_marks = max(marks_list)\n",
-        "lowest_marks = min(marks_list)\n",
-        "\n",
-        "# getting subject name using index\n",
-        "high_sub = subject_list[marks_list.index(highest_marks)]\n",
-        "low_sub = subject_list[marks_list.index(lowest_marks)]\n",
-        "\n",
-        "print(\"Highest:\", high_sub, highest_marks)\n",
-        "print(\"Lowest:\", low_sub, lowest_marks)\n",
-        "\n",
-        "# While loop for adding new subjects\n",
-        "\n",
-        "count_new = 0\n",
-        "while True:\n",
-        "    new_sub = input(\"Enter new subject (or type done): \")\n",
-        "    if new_sub.lower() == \"done\":\n",
-        "        break\n",
-        "    try:\n",
-        "        new_marks = int(input(\"Enter marks (0-100): \"))\n",
-        "\n",
-        "        if new_marks >= 0 and new_marks <= 100:\n",
-        "            subject_list.append(new_sub)\n",
-        "            marks_list.append(new_marks)\n",
-        "            count_new += 1\n",
-        "        else:\n",
-        "            print(\"Marks should be between 0 and 100\")\n",
-        "    except:\n",
-        "        print(\"Wrong input! Please enter numbers only\")\n",
-        "print(\"\\nNew subjects added:\", count_new)\n",
-        "\n",
-        "# updated average\n",
-        "new_avg = round(sum(marks_list) / len(marks_list), 2)\n",
-        "print(\"Updated Average:\", new_avg)\n",
-        "\n"
-      ],
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "VBdpfBGzZW9X",
-        "outputId": "d0067bea-c4bb-4d0c-e416-da8d30bb245e"
-      },
-      "execution_count": 2,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "\n",
-            "Subject Wise Marks\n",
-            "Math : 88 Grade = A\n",
-            "Physics : 72 Grade = B\n",
-            "CS : 95 Grade = A+\n",
-            "English : 60 Grade = C\n",
-            "Chemistry : 78 Grade = B\n",
-            "\n",
-            "Total Marks: 393\n",
-            "Average Marks: 78.6\n",
-            "Highest: CS 95\n",
-            "Lowest: English 60\n",
-            "Enter new subject (or type done): done\n",
-            "\n",
-            "New subjects added: 0\n",
-            "Updated Average: 78.6\n"
-          ]
-        }
-      ]
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# Task - 3\n",
-        "\n",
-        "\n",
-        "# given data\n",
-        "my_class = [\n",
-        "    (\"Ayesha Sharma\",  [88, 72, 95, 60, 78]),\n",
-        "    (\"Rohit Verma\",    [55, 68, 49, 72, 61]),\n",
-        "    (\"Priya Nair\",     [91, 85, 88, 94, 79]),\n",
-        "    (\"Karan Mehta\",    [40, 55, 38, 62, 50]),\n",
-        "    (\"Sneha Pillai\",   [75, 80, 70, 68, 85]),\n",
-        "]\n",
-        "\n",
-        "print(\"\\nName              | Average | Status\")\n",
-        "print(\"----------------------------------------\")\n",
-        "\n",
-        "pass_count = 0\n",
-        "fail_count = 0\n",
-        "\n",
-        "all_avg = []  # to store all averages\n",
-        "\n",
-        "# loop through each student\n",
-        "for entry in my_class:\n",
-        "\n",
-        "    name = entry[0]       # getting name\n",
-        "    marks = entry[1]      # getting marks list\n",
-        "\n",
-        "    # calculate average\n",
-        "    total = sum(marks)\n",
-        "    avg = total / len(marks)\n",
-        "    avg = round(avg, 2)\n",
-        "\n",
-        "    all_avg.append(avg)    # storing average\n",
-        "\n",
-        "    # checking pass or fail\n",
-        "    if avg >= 60:\n",
-        "        result = \"Pass\"\n",
-        "        pass_count += 1\n",
-        "    else:\n",
-        "        result = \"Fail\"\n",
-        "        fail_count += 1\n",
-        "\n",
-        "    # printing row\n",
-        "    print(f\"{name:<18} | {avg:^7} | {result}\")\n",
-        "\n",
-        "# printing pass fail count\n",
-        "print(\"\\nPassed Students:\", pass_count)\n",
-        "print(\"Failed Students:\", fail_count)\n",
-        "\n",
-        "# finding topper\n",
-        "top_marks = max(all_avg)\n",
-        "top_index = all_avg.index(top_marks)\n",
-        "\n",
-        "top_name = my_class[top_index][0]\n",
-        "\n",
-        "print(\"Topper:\", top_name, top_marks)\n",
-        "\n",
-        "# class average\n",
-        "class_avg = sum(all_avg) / len(all_avg)\n",
-        "class_avg = round(class_avg, 2)\n",
-        "\n",
-        "print(\"Class Average:\", class_avg)\n"
-      ],
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "LDWVc77kYiN4",
-        "outputId": "c1baf0fb-2b7b-44d9-dc4e-56ef0e41de02"
-      },
-      "execution_count": 3,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "\n",
-            "Name              | Average | Status\n",
-            "----------------------------------------\n",
-            "Ayesha Sharma      |  78.6   | Pass\n",
-            "Rohit Verma        |  61.0   | Pass\n",
-            "Priya Nair         |  87.4   | Pass\n",
-            "Karan Mehta        |  49.0   | Fail\n",
-            "Sneha Pillai       |  75.6   | Pass\n",
-            "\n",
-            "Passed Students: 4\n",
-            "Failed Students: 1\n",
-            "Topper: Priya Nair 87.4\n",
-            "Class Average: 70.32\n"
-          ]
-        }
-      ]
-    },
-    {
-      "cell_type": "code",
-      "execution_count": 4,
-      "metadata": {
-        "id": "5lttMB1vmKhF",
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "outputId": "3a05ba91-04bc-42d8-e9d7-251d22413e6b"
-      },
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "\n",
-            "Clean Text: python is a versatile language. it supports object oriented, functional, and procedural programming. python is widely used in data science and machine learning.\n",
-            "\n",
-            "Title Case: Python Is A Versatile Language. It Supports Object Oriented, Functional, And Procedural Programming. Python Is Widely Used In Data Science And Machine Learning.\n",
-            "\n",
-            "Python word count: 2\n",
-            "\n",
-            "After Replacement: Python 🐍 is a versatile language. it supports object oriented, functional, and procedural programming. Python 🐍 is widely used in data science and machine learning.\n",
-            "\n",
-            "Sentences List: ['python is a versatile language', 'it supports object oriented, functional, and procedural programming', 'python is widely used in data science and machine learning.']\n",
-            "\n",
-            "Numbered Sentences:\n",
-            "1 . python is a versatile language.\n",
-            "2 . it supports object oriented, functional, and procedural programming.\n",
-            "3 . python is widely used in data science and machine learning.\n"
-          ]
-        }
-      ],
-      "source": [
-        "\n",
-        "# Task-  4\n",
-        "\n",
-        "\n",
-        "\n",
-        "# given essay\n",
-        "text_data = \"  python is a versatile language. it supports object oriented, functional, and procedural programming. python is widely used in data science and machine learning.  \"\n",
-        "\n",
-        "# step 1: remove extra spaces\n",
-        "clean_text = text_data.strip()\n",
-        "print(\"\\nClean Text:\", clean_text)\n",
-        "\n",
-        "# step 2: convert to title case\n",
-        "title_text = clean_text.title()\n",
-        "print(\"\\nTitle Case:\", title_text)\n",
-        "\n",
-        "# step 3: count 'python'\n",
-        "count_word = clean_text.count(\"python\")\n",
-        "print(\"\\nPython word count:\", count_word)\n",
-        "\n",
-        "# step 4: replace word\n",
-        "new_text = clean_text.replace(\"python\", \"Python 🐍\")\n",
-        "print(\"\\nAfter Replacement:\", new_text)\n",
-        "\n",
-        "# step 5: split into sentences\n",
-        "sentence_list = clean_text.split(\". \")\n",
-        "print(\"\\nSentences List:\", sentence_list)\n",
-        "\n",
-        "# step 6: print sentences one by one\n",
-        "print(\"\\nNumbered Sentences:\")\n",
-        "num = 1\n",
-        "\n",
-        "for line in sentence_list:\n",
-        "\n",
-        "    # adding . if not present\n",
-        "    if not line.endswith(\".\"):\n",
-        "        line = line + \".\"\n",
-        "\n",
-        "    print(num, \".\", line)\n",
-        "\n",
-        "    num += 1"
-      ]
-    }
-  ],
-  "metadata": {
-    "colab": {
-      "provenance": []
-    },
-    "kernelspec": {
-      "display_name": "Python 3",
-      "name": "python3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "nbformat": 4,
-  "nbformat_minor": 0
-}
+
+
+# PART 1: Python Basics & Control Flow
+
+
+# Task- 1
+
+# data provided
+
+raw_students = [
+    {"name": "  ayesha SHARMA  ", "roll": "101", "marks_str": "88, 72, 95, 60, 78"},
+    {"name": "ROHIT verma",       "roll": "102", "marks_str": "55, 68, 49, 72, 61"},
+    {"name": "  Priya Nair  ",    "roll": "103", "marks_str": "91, 85, 88, 94, 79"},
+    {"name": "karan MEHTA",       "roll": "104", "marks_str": "40, 55, 38, 62, 50"},
+    {"name": " Sneha pillai ",    "roll": "105", "marks_str": "75, 80, 70, 68, 85"},
+]
+
+# new list to store cleaned data
+final_list = []
+
+# looping through each student
+for record in raw_students:
+
+    # removing spaces and fixing name format
+    full_name = record["name"].strip().title()
+
+    # converting roll number from string to int
+    roll_no = int(record["roll"])
+
+    # converting marks string into list of numbers
+    marks_list = []
+    for num in record["marks_str"].split(", "):
+        marks_list.append(int(num))
+
+    # checking if name is valid
+    is_valid = True
+    for part in full_name.split():
+        if not part.isalpha():
+            is_valid = False
+
+    # printing result
+    if is_valid:
+        print("✓ Valid name")
+    else:
+        print("✗ Invalid name")
+
+    # printing student info
+    print("=" * 32)
+    print("Student :", full_name)
+    print("Roll No :", roll_no)
+    print("Marks   :", marks_list)
+    print("=" * 32)
+
+    # storing cleaned data
+    final_list.append({
+        "name": full_name,
+        "roll": roll_no,
+        "marks": marks_list
+    })
+
+# finding student with roll 103
+for item in final_list:
+    if item["roll"] == 103:
+        print(item["name"].upper())
+        print(item["name"].lower())
+
+
+     
+✓ Valid name
+================================
+Student : Ayesha Sharma
+Roll No : 101
+Marks   : [88, 72, 95, 60, 78]
+================================
+✓ Valid name
+================================
+Student : Rohit Verma
+Roll No : 102
+Marks   : [55, 68, 49, 72, 61]
+================================
+✓ Valid name
+================================
+Student : Priya Nair
+Roll No : 103
+Marks   : [91, 85, 88, 94, 79]
+================================
+✓ Valid name
+================================
+Student : Karan Mehta
+Roll No : 104
+Marks   : [40, 55, 38, 62, 50]
+================================
+✓ Valid name
+================================
+Student : Sneha Pillai
+Roll No : 105
+Marks   : [75, 80, 70, 68, 85]
+================================
+PRIYA NAIR
+priya nair
+
+# Task - 2
+
+
+
+student = "Ayesha Sharma"
+
+# list of subjects and marks
+subject_list = ["Math", "Physics", "CS", "English", "Chemistry"]
+marks_list = [88, 72, 95, 60, 78]
+
+# function to calculate grade
+def find_grade(score):
+    if score >= 90:
+        return "A+"
+    elif score >= 80:
+        return "A"
+    elif score >= 70:
+        return "B"
+    elif score >= 60:
+        return "C"
+    else:
+        return "F"
+
+# printing each subject with marks and grade
+
+print("\nSubject Wise Marks")
+for index in range(len(subject_list)):
+    sub_name = subject_list[index]
+    score = marks_list[index]
+    print(sub_name, ":", score, "Grade =", find_grade(score))
+
+# calculating total marks
+total_marks = sum(marks_list)
+
+# calculating average
+average_marks = round(total_marks / len(marks_list), 2)
+
+print("\nTotal Marks:", total_marks)
+print("Average Marks:", average_marks)
+
+# finding highest and lowest
+highest_marks = max(marks_list)
+lowest_marks = min(marks_list)
+
+# getting subject name using index
+high_sub = subject_list[marks_list.index(highest_marks)]
+low_sub = subject_list[marks_list.index(lowest_marks)]
+
+print("Highest:", high_sub, highest_marks)
+print("Lowest:", low_sub, lowest_marks)
+
+# While loop for adding new subjects
+
+count_new = 0
+while True:
+    new_sub = input("Enter new subject (or type done): ")
+    if new_sub.lower() == "done":
+        break
+    try:
+        new_marks = int(input("Enter marks (0-100): "))
+
+        if new_marks >= 0 and new_marks <= 100:
+            subject_list.append(new_sub)
+            marks_list.append(new_marks)
+            count_new += 1
+        else:
+            print("Marks should be between 0 and 100")
+    except:
+        print("Wrong input! Please enter numbers only")
+print("\nNew subjects added:", count_new)
+
+# updated average
+new_avg = round(sum(marks_list) / len(marks_list), 2)
+print("Updated Average:", new_avg)
+
+
+     
+Subject Wise Marks
+Math : 88 Grade = A
+Physics : 72 Grade = B
+CS : 95 Grade = A+
+English : 60 Grade = C
+Chemistry : 78 Grade = B
+
+Total Marks: 393
+Average Marks: 78.6
+Highest: CS 95
+Lowest: English 60
+Enter new subject (or type done): done
+
+New subjects added: 0
+Updated Average: 78.6
+
+# Task - 3
+
+
+# given data
+my_class = [
+    ("Ayesha Sharma",  [88, 72, 95, 60, 78]),
+    ("Rohit Verma",    [55, 68, 49, 72, 61]),
+    ("Priya Nair",     [91, 85, 88, 94, 79]),
+    ("Karan Mehta",    [40, 55, 38, 62, 50]),
+    ("Sneha Pillai",   [75, 80, 70, 68, 85]),
+]
+
+print("\nName              | Average | Status")
+print("----------------------------------------")
+
+pass_count = 0
+fail_count = 0
+
+all_avg = []  # to store all averages
+
+# loop through each student
+for entry in my_class:
+
+    name = entry[0]       # getting name
+    marks = entry[1]      # getting marks list
+
+    # calculate average
+    total = sum(marks)
+    avg = total / len(marks)
+    avg = round(avg, 2)
+
+    all_avg.append(avg)    # storing average
+
+    # checking pass or fail
+    if avg >= 60:
+        result = "Pass"
+        pass_count += 1
+    else:
+        result = "Fail"
+        fail_count += 1
+
+    # printing row
+    print(f"{name:<18} | {avg:^7} | {result}")
+
+# printing pass fail count
+print("\nPassed Students:", pass_count)
+print("Failed Students:", fail_count)
+
+# finding topper
+top_marks = max(all_avg)
+top_index = all_avg.index(top_marks)
+
+top_name = my_class[top_index][0]
+
+print("Topper:", top_name, top_marks)
+
+# class average
+class_avg = sum(all_avg) / len(all_avg)
+class_avg = round(class_avg, 2)
+
+print("Class Average:", class_avg)
+
+     
+Name              | Average | Status
+----------------------------------------
+Ayesha Sharma      |  78.6   | Pass
+Rohit Verma        |  61.0   | Pass
+Priya Nair         |  87.4   | Pass
+Karan Mehta        |  49.0   | Fail
+Sneha Pillai       |  75.6   | Pass
+
+Passed Students: 4
+Failed Students: 1
+Topper: Priya Nair 87.4
+Class Average: 70.32
+
+
+# Task-  4
+
+
+
+# given essay
+text_data = "  python is a versatile language. it supports object oriented, functional, and procedural programming. python is widely used in data science and machine learning.  "
+
+# step 1: remove extra spaces
+clean_text = text_data.strip()
+print("\nClean Text:", clean_text)
+
+# step 2: convert to title case
+title_text = clean_text.title()
+print("\nTitle Case:", title_text)
+
+# step 3: count 'python'
+count_word = clean_text.count("python")
+print("\nPython word count:", count_word)
+
+# step 4: replace word
+new_text = clean_text.replace("python", "Python 🐍")
+print("\nAfter Replacement:", new_text)
+
+# step 5: split into sentences
+sentence_list = clean_text.split(". ")
+print("\nSentences List:", sentence_list)
+
+# step 6: print sentences one by one
+print("\nNumbered Sentences:")
+num = 1
+
+for line in sentence_list:
+
+    # adding . if not present
+    if not line.endswith("."):
+        line = line + "."
+
+    print(num, ".", line)
+
+    num += 1
+     
+Clean Text: python is a versatile language. it supports object oriented, functional, and procedural programming. python is widely used in data science and machine learning.
+
+Title Case: Python Is A Versatile Language. It Supports Object Oriented, Functional, And Procedural Programming. Python Is Widely Used In Data Science And Machine Learning.
+
+Python word count: 2
+
+After Replacement: Python 🐍 is a versatile language. it supports object oriented, functional, and procedural programming. Python 🐍 is widely used in data science and machine learning.
+
+Sentences List: ['python is a versatile language', 'it supports object oriented, functional, and procedural programming', 'python is widely used in data science and machine learning.']
+
+Numbered Sentences:
+1 . python is a versatile language.
+2 . it supports object oriented, functional, and procedural programming.
+3 . python is widely used in data science and machine learning.
